@@ -20,7 +20,7 @@
       </td>
       <td>
         <mat-form-field style="width:120px">
-          <input matInput value="38,5">
+          <input matInput type="number" [(ngModel)]="weeklyHours">
           <span matTextSuffix>h</span>
         </mat-form-field>
       </td>
@@ -31,11 +31,13 @@
       </td>
       <td>
         <mat-form-field style="width:120px">
-          <input matInput value="45">
+          <input matInput type="number" [(ngModel)]="breakDuration">
           <span matTextSuffix>min</span>
         </mat-form-field>
       </td>
     </tr>
   </table>
+
+  <button mat-raised-button (click)="saveSettings()">Save</button>
 
 </div>

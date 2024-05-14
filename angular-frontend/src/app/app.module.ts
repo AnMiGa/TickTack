@@ -19,6 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
 
 export function apiConfigFactory(): Configuration {
   const params: ConfigurationParameters = {
@@ -52,7 +53,8 @@ export function apiConfigFactory(): Configuration {
     MatFormField,
     MatLabel,
     MatInput,
-    MatSuffix
+    MatSuffix,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()
