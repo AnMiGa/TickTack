@@ -4,23 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4351a1f4-e8eb-4597-83a7-1143603ce602" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/angular-frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/angular.json" afterDir="false" />
+    <list default="true" id="4351a1f4-e8eb-4597-83a7-1143603ce602" name="Changes" comment="added gitignore on top level">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular-frontend/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/angular-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/angular-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/angular-frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular-frontend/src/app/pages/overview/overview.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/app/pages/overview/overview.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular-frontend/src/app/pages/settings/settings.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/app/pages/settings/settings.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular-frontend/src/app/pages/settings/settings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/app/pages/settings/settings.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular-frontend/src/app/pages/timesheet/timesheet.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/app/pages/timesheet/timesheet.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular-frontend/src/app/pages/timesheet/timesheet.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-frontend/src/app/pages/timesheet/timesheet.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/src/main/java/com/fhdw/webproject/springbootbackend/SpringbootBackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/src/main/java/com/fhdw/webproject/springbootbackend/SpringbootBackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/angular-frontend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AnMiGa&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="d592220a-ab6a-45c8-82aa-afca5aaf8a7b" />
+        <option name="url" value="https://github.com/AnMiGa/TickTack.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -41,37 +68,56 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2ftwYiR4tRbfWhKWHKcn1FIL4CP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="flattenPackages" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JavaScript Debug.overview.component.html.executor&quot;: &quot;Run&quot;,
-    &quot;Karma.app.component.spec.ts.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Backend.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/A1B917A/IdeaProjects/TickTack&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.ignored.files&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\A1B917A\\IdeaProjects\\TickTack\\angular-frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "JavaScript Debug.overview.component.html.executor": "Run",
+    "Karma.app.component.spec.ts.executor": "Run",
+    "Maven.Backend.executor": "Run",
+    "Maven.springboot-backend [clean].executor": "Run",
+    "Maven.springboot-backend [package].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.SpringbootBackendApplication.executor": "Run",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/A1B917A/IdeaProjects/TickTack/angular-frontend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.start.executor": "Run",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "show.migrate.to.gradle.popup": "false",
+    "ts.external.directory.path": "C:\\Users\\A1B917A\\IdeaProjects\\TickTack\\angular-frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.fhdw.webproject.api" />
+      <recent name="com.openapi.api" />
+      <recent name="api" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\A1B917A\IdeaProjects\TickTack\angular-frontend" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.SpringbootBackendApplication">
     <configuration default="true" type="Application" factoryName="Application">
       <module name="TickTack" />
@@ -117,10 +163,55 @@
       <workItem from="1714642973091" duration="197000" />
       <workItem from="1714643243507" duration="317000" />
       <workItem from="1714643571909" duration="5000" />
+      <workItem from="1714643612192" duration="2425000" />
+      <workItem from="1715151244090" duration="9829000" />
+      <workItem from="1715162048966" duration="21000" />
+      <workItem from="1715607006261" duration="10576000" />
     </task>
+    <task id="LOCAL-00001" summary="basic project setup">
+      <option name="closed" value="true" />
+      <created>1714644153830</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714644153830</updated>
+    </task>
+    <task id="LOCAL-00002" summary="basic project setup">
+      <option name="closed" value="true" />
+      <created>1714644825971</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714644825971</updated>
+    </task>
+    <task id="LOCAL-00003" summary="basic project setup">
+      <option name="closed" value="true" />
+      <created>1714645254339</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714645254339</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added gitignore on top level">
+      <option name="closed" value="true" />
+      <created>1714645474365</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714645474365</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/angular-frontend" />
+    </ignored-roots>
+    <MESSAGE value="basic project setup" />
+    <MESSAGE value="added gitignore on top level" />
+    <option name="LAST_COMMIT_MESSAGE" value="added gitignore on top level" />
   </component>
 </project>

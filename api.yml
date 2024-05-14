@@ -1,0 +1,66 @@
+openapi: 3.0.3
+info:
+  title: TickTack API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: timesheet
+    description: Everything needed for the timesheet
+
+paths:
+  /hello:
+    get:
+      responses:
+        "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: string
+                  example: pong
+      
+  
+  /postEntry:
+    post:
+      tags:
+        - timesheet
+      summary: send a new entry
+      description: post a new entry
+      operationId: postEntry
+      requestBody:
+        description: entry you want to send
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeEntry'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+
+components:
+  schemas:
+    TimeEntry:
+      title: time entry
+      description: time entry with start and end time
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: '2024-05-07T15:50+01:00'
+        startTime:
+          type: string
+          format: date-time
+          example: "2024-05-07T15:50+01:00"
+        endTime:
+          type: string
+          format: date-time
+          example: "2024-05-07T15:50+01:00"
+

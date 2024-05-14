@@ -14,6 +14,18 @@ import { OverviewComponent } from './pages/overview/overview.component';
 import { TimesheetComponent } from './pages/timesheet/timesheet.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import {MatCard, MatCardContent} from "@angular/material/card";
+import {ApiModule, Configuration, ConfigurationParameters} from "./api";
+import {HttpClientModule} from "@angular/common/http";
+import {MatGridList, MatGridTile} from "@angular/material/grid-list";
+import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+
+export function apiConfigFactory(): Configuration {
+  const params: ConfigurationParameters = {
+    basePath: 'http://localhost:8080',
+  };
+  return new Configuration(params);
+}
 
 @NgModule({
   declarations: [
@@ -32,7 +44,15 @@ import {MatCard, MatCardContent} from "@angular/material/card";
     MatIconModule,
     MatListModule,
     MatCard,
-    MatCardContent
+    MatCardContent,
+    ApiModule.forRoot(apiConfigFactory),
+    HttpClientModule,
+    MatGridList,
+    MatGridTile,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatSuffix
   ],
   providers: [
     provideAnimationsAsync()
