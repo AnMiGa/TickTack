@@ -1,6 +1,29 @@
-<div class="container" (click)="sendRequest()">
+<div class="container">
   <h2>TimeSheet</h2>
-  <button mat-raised-button>Test</button>
-  <p>Answer: {{text}}</p>
+  <div style="display: flex; align-items: center; text-align: center">
+    <button mat-icon-button (click)="previousWeek()" [disabled]="isFirst" >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <span style=" display: inline-block; width: 200px">{{ curWeek.cw }}</span>
+    <button mat-icon-button (click)="nextWeek()" [hidden]="isLast">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+    <button mat-icon-button (click)="addNewWeek()" [hidden]="!isLast" matTooltip="add new week" matTooltipShowDelay="2000">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div>
+    <mat-card>
+      <mat-card-content>
+        <div class="entries">
+          <mat-label>MONTAG</mat-label>
+          <mat-label>13.05.24</mat-label>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+<!--  <button mat-raised-button (click)="sendRequest()">Test</button>-->
+<!--  <p>Answer: {{text}}</p>-->
 </div>
 

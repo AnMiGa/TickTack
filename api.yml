@@ -46,6 +46,22 @@ paths:
 
 components:
   schemas:
+    Week:
+      title: Week object
+      description: object with time entries for one week
+      type: object
+      properties:
+        cw:
+          type: string
+          example: 'KW 20'
+        totalHoursWorked:
+          type: number
+          example: "38,5"
+        timeEntries:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeEntry'
+
     TimeEntry:
       title: time entry
       description: time entry with start and end time

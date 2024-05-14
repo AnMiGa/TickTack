@@ -20,6 +20,7 @@ import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
+import {MatTooltip} from "@angular/material/tooltip";
 
 export function apiConfigFactory(): Configuration {
   const params: ConfigurationParameters = {
@@ -36,26 +37,27 @@ export function apiConfigFactory(): Configuration {
     TimesheetComponent,
     SettingsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatCard,
-    MatCardContent,
-    ApiModule.forRoot(apiConfigFactory),
-    HttpClientModule,
-    MatGridList,
-    MatGridTile,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatSuffix,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatCard,
+        MatCardContent,
+        ApiModule.forRoot(apiConfigFactory),
+        HttpClientModule,
+        MatGridList,
+        MatGridTile,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatSuffix,
+        FormsModule,
+        MatTooltip
+    ],
   providers: [
     provideAnimationsAsync()
   ],
