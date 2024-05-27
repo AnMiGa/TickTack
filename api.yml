@@ -7,19 +7,37 @@ servers:
 tags:
   - name: timesheet
     description: Everything needed for the timesheet
+  - name: settings
+    description: Everything about settings
 
 paths:
   /hello:
     get:
       responses:
         "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: string
-                  example: pong
-      
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
+
+  /getWeeksAll:
+    get:
+      tags:
+        - timesheet
+      summary: get all weeks
+      description: get all weeks
+      operationId: getWeeksAll
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeeksArray'
+        '500':
+          description: Server error
   
   /postEntry:
     post:
@@ -43,20 +61,70 @@ paths:
         '422':
           description: Validation exception
 
+  /saveSettings:
+    post:
+      tags:
+        - settings
+      summary: save current settings
+      description: save current settings
+      operationId: saveSettings
+      requestBody:
+        description: settings to save
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settings'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+  /getSettings:
+    get:
+      tags:
+        - settings
+      summary: get saved settings
+      description: get saved settings
+      operationId: getSettings
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+        '500':
+          description: Server error
+
 
 components:
   schemas:
+    WeeksArray:
+      title: Weeks Array
+      description: array containing weeks
+      type: array
+      items:
+        $ref: '#/components/schemas/Week'
+
     Week:
       title: Week object
       description: object with time entries for one week
       type: object
       properties:
+        year:
+          type: integer
+          example: 2024
         cw:
-          type: string
-          example: 'KW 20'
+          type: integer
+          example: 20
         totalHoursWorked:
           type: number
-          example: "38,5"
+          format: float
+          example: 38.5
         timeEntries:
           type: array
           items:
@@ -67,16 +135,39 @@ components:
       description: time entry with start and end time
       type: object
       properties:
-        timestamp:
+        id:
+          type: integer
+          example: 1
+        day:
           type: string
-          format: date-time
-          example: '2024-05-07T15:50+01:00'
+          example: 'MONDAY'
+        date:
+          type: string
+          example: "13.05.24"
         startTime:
           type: string
-          format: date-time
-          example: "2024-05-07T15:50+01:00"
+          example: "06:50"
         endTime:
           type: string
-          format: date-time
-          example: "2024-05-07T15:50+01:00"
+          example: "15:50"
+
+    Settings:
+      title: settings
+      description: settings defining the weekly working hours and break duration
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        user_name:
+          type: string
+          example: Hans
+        weekly_hours:
+          type: number
+          format: float
+          example: 38.5
+        break_duration:
+          type: integer
+          example: 45
+
 

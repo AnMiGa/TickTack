@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SettingsService} from "../../services/settings.service";
+import {AppSettingsService} from "../../services/app-settings.service";
 
 @Component({
   selector: 'app-settings',
@@ -7,20 +7,20 @@ import {SettingsService} from "../../services/settings.service";
   styleUrl: './settings.component.css'
 })
 export class SettingsComponent implements OnInit{
-  weeklyHours: number;
-  breakDuration: number;
+  // weeklyHours: number;
+  // breakDuration: number;
 
-  constructor(private settingsService: SettingsService) {
+  constructor(public settingsService: AppSettingsService) {
   }
 
   ngOnInit(){
-      this.weeklyHours = this.settingsService.weeklyHours;
-      this.breakDuration = this.settingsService.breakDurationMinutes;
+      // this.weeklyHours = this.settingsService.weeklyHours;
+      // this.breakDuration = this.settingsService.breakDurationMinutes;
   }
 
   saveSettings(){
-      this.settingsService.weeklyHours = this.weeklyHours;
-      this.settingsService.breakDurationMinutes = this.breakDuration;
+      // this.settingsService.weeklyHours = this.weeklyHours;
+      // this.settingsService.breakDurationMinutes = this.breakDuration;
   }
 
 
