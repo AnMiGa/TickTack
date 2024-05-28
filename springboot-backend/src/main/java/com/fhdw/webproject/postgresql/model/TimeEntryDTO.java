@@ -20,6 +20,9 @@ public class TimeEntryDTO {
     public TimeEntryDTO() {
     }
 
+    public Integer getId() {
+        return id;
+    }
 
     public String getDay() {
         return day;

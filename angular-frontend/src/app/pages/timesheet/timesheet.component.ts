@@ -22,12 +22,16 @@ export class TimesheetComponent {
     private defaultService: DefaultService,
     private dataService: DataService,
     private settingsService: AppSettingsService) {
-    this.weeks = dataService.weeks;
+    dataService.getWeeksAll().pipe(first()).subscribe({
+      next: (value: Week[]) => {
+        this.weeks = value;
+      }
+    });
 
 
     this.curIndex = this.weeks.length - 1;
     this.isLast = this.curIndex <= 0;
-    this.isFirst= this.curIndex >= this.weeks.length -1;
+    this.isFirst = this.curIndex >= this.weeks.length - 1;
     this.curWeek = this.weeks[this.curIndex];
 
   }
@@ -59,40 +63,49 @@ export class TimesheetComponent {
 
   addNewWeek() {
 
-    let newWeek:Week={};
-    newWeek.timeEntries =[];
+    let newWeek: Week = {};
+    newWeek.timeEntries = [];
 
     const curr: Date = new Date;
-    let first: number = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week +1 because starts with sunday
+    let firstDay: number = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week +1 because starts with sunday
 
-    newWeek.year=curr.getFullYear();
-   newWeek.cw=this.getDateWeek(curr);
+    newWeek.year = curr.getFullYear();
+    newWeek.cw = this.getDateWeek(curr);
 
-    for(let i = first; i < first + 5; i++){
+    for (let i = firstDay; i < firstDay + 5; i++) {
       let entry: TimeEntry = {};
 
       let date: Date = new Date(curr.setDate(i));
 
-      entry.day = date.toLocaleString('en-us', {weekday:'long'}).toUpperCase();
+      entry.day = date.toLocaleString('en-us', {weekday: 'long'}).toUpperCase();
 
       let dayString = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
       let monthString = (date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
       let yearString = date.getFullYear() % 100;
 
 
-      entry.date=dayString + '.' + monthString + '.' + yearString;
+      entry.date = dayString + '.' + monthString + '.' + yearString;
 
       newWeek.timeEntries.push(entry);
     }
 
-    this.weeks.push(newWeek);
+    this.dataService.saveWeek(newWeek)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.dataService.getWeeksAll().pipe(first()).subscribe({
+            next: (value: Week[]) => {
+              this.weeks = value;
+              this.curIndex = this.weeks.length - 1;
+              this.curWeek = this.weeks[this.curIndex];
 
-    this.curIndex = this.weeks.length - 1;
-    this.curWeek = this.weeks[this.curIndex];
+              this.isLast = false;
+            }
+          });
+        }
+      })
 
-    this.isLast=false;
 
-    this.dataService.weeks = this.weeks;
   }
 
 
@@ -113,8 +126,8 @@ export class TimesheetComponent {
         (currentDate.getTime() - nextMonday.getTime()) / (24 * 3600 * 1000) / 7) : 1);
   }
 
-  calcTimeDifference(start, end): string{
-    if(start && end){
+  calcTimeDifference(start, end): string {
+    if (start && end) {
       const [h1, m1] = start.split(':');
       const [h2, m2] = end.split(':');
       let diff = (h2 - h1) * 60 + (m2 - m1 - this.settingsService.breakDurationMinutes);
