@@ -23,6 +23,7 @@ public class TimesheetApiDelegateImpl implements TimesheetApiDelegate {
 
     @Override
     public ResponseEntity<Void> saveWeek(Week week) {
-        return TimesheetApiDelegate.super.saveWeek(week);
+        this.serviceFacade.saveWeek(week);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

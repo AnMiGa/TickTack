@@ -29,10 +29,10 @@
           <div>{{ entry.day }}</div>
           <div>{{ entry.date }}</div>
           <div>
-            <input type="time" [(ngModel)]="entry.startTime" class="w-1/2">
+            <input type="time" [(ngModel)]="entry.startTime" class="w-1/2" (change)="setInputChanged()">
           </div>
           <div>
-            <input type="time" [(ngModel)]="entry.endTime" class="w-1/2">
+            <input type="time" [(ngModel)]="entry.endTime" class="w-1/2" (change)="setInputChanged()">
           </div>
           <div>{{calcTimeDifference(entry.startTime, entry.endTime)}} h</div>
         </div>

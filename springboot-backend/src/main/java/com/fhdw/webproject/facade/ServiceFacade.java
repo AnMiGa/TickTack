@@ -23,4 +23,8 @@ public class ServiceFacade {
     public List<Week> getWeeksAll() {
         return weekDataService.loadWeeksAll();
     }
+
+    public void saveWeek(Week week) {
+        weekDataService.saveWeek(week);
+    }
 }
