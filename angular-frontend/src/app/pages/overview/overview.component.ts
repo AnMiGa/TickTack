@@ -1,15 +1,30 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppSettingsService} from "../../services/app-settings.service";
+import {DataService} from "../../services/data.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })
-export class OverviewComponent {
+export class OverviewComponent implements OnInit {
 
-  constructor(public settingsService: AppSettingsService) {
+  hoursCurrWeek: number;
 
+  constructor(public settingsService: AppSettingsService,
+              public dataService: DataService) {
+
+  }
+
+  ngOnInit() {
+    this.dataService.getWorkedHoursCurrWeek()
+      .pipe(first())
+      .subscribe({
+        next: value => {
+          this.hoursCurrWeek = value;
+        }
+      })
   }
 
 }

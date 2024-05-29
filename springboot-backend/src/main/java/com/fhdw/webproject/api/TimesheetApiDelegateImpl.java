@@ -3,6 +3,7 @@ package com.fhdw.webproject.api;
 import com.fhdw.webproject.facade.ServiceFacade;
 import com.openapi.api.TimesheetApiDelegate;
 import com.openapi.model.Week;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,10 @@ public class TimesheetApiDelegateImpl implements TimesheetApiDelegate {
     public ResponseEntity<Void> saveWeek(Week week) {
         this.serviceFacade.saveWeek(week);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Double> getWorkedHoursCurrWeek() {
+        return new ResponseEntity<>(serviceFacade.getWorkedHoursCurrWeek(), HttpStatus.OK);
     }
 }

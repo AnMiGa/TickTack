@@ -52,7 +52,7 @@ export class DataService {
 
 
   public getWeeksAll(): Observable<Week[]> {
-    return new Observable<Week[]>( o => {
+    return new Observable<Week[]>(o => {
       this.timesheetService.getWeeksAll()
         .pipe(first())
         .subscribe({
@@ -74,10 +74,23 @@ export class DataService {
         .pipe(first())
         .subscribe({
           next: () => {
-              o.next();
+            o.next();
           },
           error: () => {
             o.error();
+          }
+        })
+
+    })
+  }
+
+  public getWorkedHoursCurrWeek(): Observable<number> {
+    return new Observable(o => {
+      this.timesheetService.getWorkedHoursCurrWeek()
+        .pipe(first())
+        .subscribe({
+          next: (value: number) => {
+            o.next(value);
           }
         })
 
