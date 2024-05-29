@@ -49,11 +49,19 @@ public class WeekDataService {
             week.addTimeEntriesItem(convertDTOtoTimeEntry(entry));
             week.getTimeEntries().sort((e1, e2) -> LocalDate.parse(e1.getDate(), DATE_FORMAT).compareTo(LocalDate.parse(e2.getDate(), DATE_FORMAT)));
         }
+        result.sort((w1, w2) -> {
+            if (w1.getYear().compareTo(w2.getYear()) == 0) {
+                return w1.getCw().compareTo(w2.getCw());
+            } else {
+                return w1.getYear().compareTo(w2.getYear());
+            }
+        });
+
         return result;
     }
 
     private void sortTimeEntries(List<TimeEntry> timeEntries) {
-       timeEntries.sort((e1, e2) -> LocalDate.parse(e1.getDate(), DATE_FORMAT).compareTo(LocalDate.parse(e2.getDate(), DATE_FORMAT)));
+        timeEntries.sort((e1, e2) -> LocalDate.parse(e1.getDate(), DATE_FORMAT).compareTo(LocalDate.parse(e2.getDate(), DATE_FORMAT)));
     }
 
     private TimeEntry convertDTOtoTimeEntry(TimeEntryDTO entry) {

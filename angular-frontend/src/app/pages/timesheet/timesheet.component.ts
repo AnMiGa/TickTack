@@ -86,7 +86,7 @@ ngOnDestroy(){
   addNewWeek() {
     const curr: Date = new Date;
 
-    const currYear = curr.getFullYear();
+    const currYear: number = curr.getFullYear();
     const currCW: number = this.getDateWeek(curr);
 
     const weekExists = this.weeks.find((week: Week) => week.cw == currCW && week.year == currYear);
@@ -132,8 +132,8 @@ ngOnDestroy(){
           }
         })
     } else {
-      this.snackBar.open('Week already exists!', '', {
-        duration: 3000
+      this.snackBar.open('Week already exists!', 'close', {
+        duration: 5000
       });
     }
 
@@ -183,6 +183,5 @@ ngOnDestroy(){
 
   setInputChanged() {
     this.inputChanged = true;
-    console.log("Test");
   }
 }
