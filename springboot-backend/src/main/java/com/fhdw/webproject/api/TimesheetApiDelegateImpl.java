@@ -32,4 +32,9 @@ public class TimesheetApiDelegateImpl implements TimesheetApiDelegate {
     public ResponseEntity<Double> getWorkedHoursCurrWeek() {
         return new ResponseEntity<>(serviceFacade.getWorkedHoursCurrWeek(), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Double> getCurBalance() {
+        return new ResponseEntity<>(serviceFacade.getCurBalance(), HttpStatus.OK);
+    }
 }

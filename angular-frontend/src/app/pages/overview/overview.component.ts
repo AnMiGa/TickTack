@@ -11,6 +11,7 @@ import {first} from "rxjs";
 export class OverviewComponent implements OnInit {
 
   hoursCurrWeek: number;
+  curBalance: number;
 
   constructor(public settingsService: AppSettingsService,
               public dataService: DataService) {
@@ -24,7 +25,15 @@ export class OverviewComponent implements OnInit {
         next: value => {
           this.hoursCurrWeek = value;
         }
-      })
+      });
+
+    this.dataService.getCurBalance()
+      .pipe(first())
+      .subscribe({
+        next: value => {
+          this.curBalance = value;
+        }
+      });
   }
 
 }

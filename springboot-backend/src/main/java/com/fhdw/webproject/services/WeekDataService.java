@@ -16,7 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -27,7 +26,7 @@ public class WeekDataService {
     private TimeEntryRepository timeEntryRepository;
 
     @Autowired
-    private SettingsRepository settingsRepository;
+    private SettingsService settingsService;
 
     DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yy");
 
@@ -99,11 +98,15 @@ public class WeekDataService {
         }
     }
 
-    public Double getWorkedHoursCurrWeek() {
-        LocalDate curDate = LocalDate.now();
+    public Double getWorkedHoursCurrWeek(){
+        return getWorkedHoursByWeek(LocalDate.now(), false);
+    }
 
-        int curYear = curDate.getYear();
-        int curCW = curDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
+    public Double getWorkedHoursByWeek(LocalDate date, boolean fullWeek) {
+
+
+        int curYear = date.getYear();
+        int curCW = date.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
 
         List<Week> weeks = this.loadWeeksAll();
 
@@ -113,7 +116,9 @@ public class WeekDataService {
             List<TimeEntry> entries = new ArrayList<>();
             for(TimeEntry e : curWeek.get().getTimeEntries()){
                 LocalDate entryDate = LocalDate.parse(e.getDate(), DATE_FORMAT);
-                if(entryDate.isBefore(curDate) || entryDate.isEqual(curDate)){
+                if(fullWeek){
+                    entries.add(e);
+                } else if(entryDate.isBefore(date) || entryDate.isEqual(date)){
                     entries.add(e);
                 }
             }
@@ -127,8 +132,7 @@ public class WeekDataService {
     }
 
     private Double calcTotalHours(List<TimeEntry> entries) {
-        Optional<SettingsDTO> settings = settingsRepository.findById(1L);
-        int break_duration = settings.isPresent() ? settings.get().getBreak_duration() : 0;
+       int break_duration = settingsService.loadSettings().getBreakDuration();
 
         int hours_without_break = 6;
 
@@ -150,5 +154,24 @@ public class WeekDataService {
         LocalTime end = entry.getEndTime().isEmpty() ? null : LocalTime.parse(entry.getEndTime());
 
         return start == null || end == null ? Duration.ZERO: Duration.between(start, end);
+    }
+
+    public Double getCurBalance() {
+        float weeklyHours = settingsService.loadSettings().getWeeklyHours();
+
+        List<Week> weeks = this.loadWeeksAll();
+
+        double requiredHours = weeks.size() * weeklyHours;
+
+        double sum = 0;
+
+        for(Week week: weeks){
+            TimeEntry firstEntry = week.getTimeEntries().get(0);
+            LocalDate date = LocalDate.parse(firstEntry.getDate(), DATE_FORMAT);
+            sum += this.getWorkedHoursByWeek(date, true);
+        }
+
+        return sum - requiredHours;
+
     }
 }

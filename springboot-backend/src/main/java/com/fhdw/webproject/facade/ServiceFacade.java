@@ -32,4 +32,6 @@ public class ServiceFacade {
     public void saveSettings(Settings settings) { settingsService.saveSettings(settings); }
 
     public Double getWorkedHoursCurrWeek() { return weekDataService.getWorkedHoursCurrWeek();}
+
+    public Double getCurBalance() { return weekDataService.getCurBalance();  }
 }

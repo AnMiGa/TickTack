@@ -92,9 +92,21 @@ export class DataService {
           next: (value: number) => {
             o.next(value);
           }
-        })
+        });
 
-    })
+    });
+  }
+
+  public getCurBalance(): Observable<number> {
+    return new Observable(o => {
+      this.timesheetService.getCurBalance()
+        .pipe(first())
+        .subscribe({
+          next: value => {
+            o.next(value);
+          }
+        });
+    });
   }
 
   // set weeks(value: Week[]) {
