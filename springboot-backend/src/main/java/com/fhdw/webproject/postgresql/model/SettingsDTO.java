@@ -15,6 +15,10 @@ public class SettingsDTO {
     @Column(name ="break_duration")
     private Integer break_duration;
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getUser_name() {
         return user_name;
     }

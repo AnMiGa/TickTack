@@ -70,7 +70,6 @@ ngOnDestroy(){
     this.isFirst = this.curIndex == this.weeks.length - 1;
     this.isLast = false;
     this.curWeek = this.weeks[this.curIndex];
-    console.log(this.curWeek)
   }
 
   previousWeek() {
@@ -80,7 +79,6 @@ ngOnDestroy(){
     this.isLast = this.curIndex == 0;
     this.isFirst = false;
     this.curWeek = this.weeks[this.curIndex];
-    console.log(this.curWeek)
   }
 
   addNewWeek() {

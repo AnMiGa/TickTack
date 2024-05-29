@@ -24,4 +24,18 @@ public class SettingsService {
         }
         return result;
     }
+
+    public void saveSettings(Settings settings) {
+        SettingsDTO result = convertToDTO(settings);
+        this.settingsRepository.save(result);
+    }
+
+    private SettingsDTO convertToDTO(Settings settings){
+        SettingsDTO result = new SettingsDTO();
+        result.setId(settings.getId());
+        result.setUser_name(settings.getUserName());
+        result.setWeekly_hours(settings.getWeeklyHours());
+        result.setBreak_duration(settings.getBreakDuration());
+        return result;
+    }
 }

@@ -1,19 +1,12 @@
 <div class="container">
   <h2>Settings</h2>
-<!--  <label>Weekly Working Hours</label>-->
-<!--  <br>-->
-<!--  <mat-form-field style="width:160px">-->
-<!--    <input matInput value="38,5">-->
-<!--    <span matTextSuffix>h</span>-->
-<!--  </mat-form-field>-->
-<!--  <br>-->
-<!--  <mat-label>Break Duration</mat-label>-->
-<!--  <br>-->
-<!--  <mat-form-field style="width:160px">-->
-<!--    <input matInput value="45">-->
-<!--    <span matTextSuffix>min</span>-->
-<!--  </mat-form-field>-->
-  <table>
+  <mat-card class="min-w-48 max-w-2xl">
+    <mat-card-content class="text-yellow-500">
+      <mat-icon class="inline-block align-middle">info</mat-icon>
+      <div class="inline-block align-middle ml-2">NOTE: changing the values affects all your stored data!</div>
+    </mat-card-content>
+  </mat-card>
+  <table class="mt-5">
     <tr>
       <td>
         <mat-label>Weekly Working Hours</mat-label>
@@ -37,7 +30,4 @@
       </td>
     </tr>
   </table>
-
-  <button mat-raised-button (click)="saveSettings()">Save</button>
-
 </div>

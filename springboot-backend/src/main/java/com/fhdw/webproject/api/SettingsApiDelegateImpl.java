@@ -23,6 +23,7 @@ public class SettingsApiDelegateImpl implements SettingsApiDelegate {
 
     @Override
     public ResponseEntity<Void> saveSettings(Settings settings) {
-        return SettingsApiDelegate.super.saveSettings(settings);
+        this.serviceFacade.saveSettings(settings);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

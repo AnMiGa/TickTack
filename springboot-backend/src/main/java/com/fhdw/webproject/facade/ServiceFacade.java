@@ -16,7 +16,8 @@ public class ServiceFacade {
     private SettingsService settingsService;
     @Autowired
     private WeekDataService weekDataService;
-    public Settings getSettings(){
+
+    public Settings getSettings() {
         return settingsService.loadSettings();
     }
 
@@ -27,4 +28,6 @@ public class ServiceFacade {
     public void saveWeek(Week week) {
         weekDataService.saveWeek(week);
     }
+
+    public void saveSettings(Settings settings) { settingsService.saveSettings(settings); }
 }

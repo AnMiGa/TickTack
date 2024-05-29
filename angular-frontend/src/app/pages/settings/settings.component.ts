@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AppSettingsService} from "../../services/app-settings.service";
 
 @Component({
@@ -6,11 +6,16 @@ import {AppSettingsService} from "../../services/app-settings.service";
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css'
 })
-export class SettingsComponent implements OnInit{
+export class SettingsComponent implements OnDestroy{
   // weeklyHours: number;
   // breakDuration: number;
 
   constructor(public settingsService: AppSettingsService) {
+  }
+
+  ngOnDestroy() {
+    this.settingsService.saveSettings();
+    console.log("Test");
   }
 
   ngOnInit(){

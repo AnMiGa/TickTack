@@ -7,6 +7,8 @@ import {first} from "rxjs";
 })
 export class AppSettingsService {
 
+  private settings: Settings;
+
   private _user_name:string;
   private _weeklyHours: number;
   private _breakDurationMinutes: number;
@@ -45,5 +47,16 @@ export class AppSettingsService {
 
   set breakDurationMinutes(value: number) {
     this._breakDurationMinutes = value;
+  }
+
+  public saveSettings(): void {
+    const curSettings: Settings =
+      {
+        "id": 1,
+        "user_name": this.user_name,
+        "weekly_hours": this.weeklyHours,
+        "break_duration": this.breakDurationMinutes
+      }
+    this.settingsService.saveSettings(curSettings).pipe(first()).subscribe();
   }
 }
