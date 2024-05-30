@@ -34,4 +34,6 @@ public class ServiceFacade {
     public Double getWorkedHoursCurrWeek() { return weekDataService.getWorkedHoursCurrWeek();}
 
     public Double getCurBalance() { return weekDataService.getCurBalance();  }
+
+    public void deleteWeek(Week week) { weekDataService.deleteWeek(week); }
 }

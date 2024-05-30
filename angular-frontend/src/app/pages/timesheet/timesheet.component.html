@@ -1,7 +1,8 @@
 <div class="container">
   <h2>TimeSheet</h2>
   <div class="grid grid-cols-3 place-items-center">
-    <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast" matTooltip="go to previous week"
+    <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast"
+            matTooltip="go to previous week"
             matTooltipShowDelay="1000">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
@@ -29,7 +30,8 @@
       <div>DURATION</div>
       <div>
         <span class="place-self-start align-top">ABSENT</span>
-        <span><mat-icon class="ml-1" [inline]="true" matTooltip="sick/holidays/vacation">help_outline</mat-icon></span></div>
+        <span><mat-icon class="ml-1" [inline]="true" matTooltip="sick/holidays/vacation">help_outline</mat-icon></span>
+      </div>
     </div>
     <mat-card *ngFor="let entry of curWeek.timeEntries" class="mt-2" [ngClass]="{'text-gray-300': entry.absent}">
       <mat-card-content>
@@ -37,10 +39,12 @@
           <div>{{ entry.day }}</div>
           <div>{{ entry.date }}</div>
           <div>
-            <input type="time" [(ngModel)]="entry.startTime" class="w-1/2" (change)="saveData()" [disabled]="entry.absent">
+            <input type="time" [(ngModel)]="entry.startTime" class="w-1/2" (change)="saveData()"
+                   [disabled]="entry.absent">
           </div>
           <div>
-            <input type="time" [(ngModel)]="entry.endTime" class="w-1/2" (change)="saveData()" [disabled]="entry.absent">
+            <input type="time" [(ngModel)]="entry.endTime" class="w-1/2" (change)="saveData()"
+                   [disabled]="entry.absent">
           </div>
           <div id="timeDiff">{{ calcTimeDifference(entry.startTime, entry.endTime) }} h</div>
           <div>
@@ -51,8 +55,12 @@
     </mat-card>
   </div>
   <div class=" grid grid-cols-6 gap-2 pr-4 pl-4 mt-5 text-xl">
-    <span class="font-bold col-start-4 place-self-end">Total: </span>
-    <span>{{ calcTotalTime() }} h</span>
+    <div class="font-bold col-start-4 text-right mt-2">Total: </div>
+    <div class="mt-2">{{ calcTotalTime() }} h</div>
+    <button class="place-self-end" mat-fab color="primary" aria-label="Example icon button with a delete icon"
+            matTooltip="delete current week" (click)="deleteWeek(curWeek)">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
 </div>
 

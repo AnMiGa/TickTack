@@ -61,6 +61,28 @@ paths:
         '422':
           description: Validation exception
 
+  /deleteWeek:
+    post:
+      tags:
+        - timesheet
+      summary: delete week with time entries
+      description: delete week with time entries
+      operationId: deleteWeek
+      requestBody:
+        description: entry you want to delete
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Week'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
   /saveSettings:
     post:
       tags:

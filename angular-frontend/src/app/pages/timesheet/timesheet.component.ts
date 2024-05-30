@@ -27,11 +27,7 @@ export class TimesheetComponent {
   ) {
     dataService.getWeeksAll().pipe(first()).subscribe({
       next: (value: Week[]) => {
-        this.weeks = value;
-        this.curIndex = this.weeks.length - 1;
-        this.isLast = this.curIndex <= 0;
-        this.isFirst = this.curIndex >= this.weeks.length - 1;
-        this.curWeek = this.weeks[this.curIndex];
+        this.setWeek(value);
       }
     });
 
@@ -41,6 +37,14 @@ export class TimesheetComponent {
     // this.isFirst = this.curIndex >= this.weeks.length - 1;
     // this.curWeek = this.weeks[this.curIndex];
 
+  }
+
+  private setWeek(value: Week[]) {
+    this.weeks = value;
+    this.curIndex = this.weeks.length - 1;
+    this.isLast = this.curIndex <= 0;
+    this.isFirst = this.curIndex >= this.weeks.length - 1;
+    this.curWeek = this.weeks[this.curIndex];
   }
 
   sendRequest() {
@@ -161,7 +165,7 @@ export class TimesheetComponent {
   calcTotalTime(): string {
     let result = "00:00"
     this.curWeek.timeEntries.forEach(e => {
-      if (!e.absent) {
+      if (!e.absent && e.startTime != null && e.endTime != null) {
         let diff = this.calcTimeDifference(e.startTime, e.endTime);
         result = this.addDifference(result, diff);
       }
@@ -186,5 +190,23 @@ export class TimesheetComponent {
 
   saveData() {
     this.dataService.saveWeek(this.curWeek).pipe(first()).subscribe();
+  }
+
+  deleteWeek(week: Week) {
+    this.dataService.deleteWeek(week)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.dataService.getWeeksAll().pipe(first()).subscribe({
+            next: (value: Week[]) => {
+              this.setWeek(value);
+              this.snackBar.open("week was deleted successfully", "close", {duration: 5000})
+            }, error: () => {
+              this.snackBar.open("Something went wrong. Week could not be deleted.", "close", {duration: 5000})
+            }
+          })
+        }
+      });
+
   }
 }

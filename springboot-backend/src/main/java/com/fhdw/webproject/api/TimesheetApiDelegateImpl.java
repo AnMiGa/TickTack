@@ -29,6 +29,12 @@ public class TimesheetApiDelegateImpl implements TimesheetApiDelegate {
     }
 
     @Override
+    public ResponseEntity<Void> deleteWeek(Week week) {
+        this.serviceFacade.deleteWeek(week);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<Double> getWorkedHoursCurrWeek() {
         return new ResponseEntity<>(serviceFacade.getWorkedHoursCurrWeek(), HttpStatus.OK);
     }

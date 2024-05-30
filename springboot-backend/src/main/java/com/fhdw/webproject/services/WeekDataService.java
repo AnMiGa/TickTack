@@ -1,8 +1,6 @@
 package com.fhdw.webproject.services;
 
-import com.fhdw.webproject.postgresql.model.SettingsDTO;
 import com.fhdw.webproject.postgresql.model.TimeEntryDTO;
-import com.fhdw.webproject.postgresql.repository.SettingsRepository;
 import com.fhdw.webproject.postgresql.repository.TimeEntryRepository;
 import com.openapi.model.TimeEntry;
 import com.openapi.model.Week;
@@ -144,52 +142,77 @@ public class WeekDataService {
 
         for(TimeEntry entry: entries){
             Duration diff = calcTimeDifference(entry);
-            duration = diff.toHours() > hours_without_break ? duration.plus(diff.minusMinutes(break_duration)): duration.plus(diff);
+            diff = subtractBreakTimeIfNeccessary(diff);
+            duration = duration.plus(diff);
         }
 
-        return (double)duration.toHours() + (double)duration.toMinutesPart()* (1.0/60.0);
-
-//        return String.format("%02d:%02d",duration.toHours(),duration.toMinutesPart());
+        return durationToDouble(duration);
 
     }
 
     private Duration calcTimeDifference(TimeEntry entry) {
-        LocalTime start = entry.getStartTime().isEmpty() ? null: LocalTime.parse(entry.getStartTime());
-        LocalTime end = entry.getEndTime().isEmpty() ? null : LocalTime.parse(entry.getEndTime());
+        LocalTime start = entry.getStartTime() == null || entry.getStartTime().isEmpty() ? null: LocalTime.parse(entry.getStartTime());
+        LocalTime end = entry.getEndTime() == null || entry.getEndTime().isEmpty() ? null : LocalTime.parse(entry.getEndTime());
 
         return start == null || end == null ? Duration.ZERO: Duration.between(start, end);
+    }
+
+    private double durationToDouble(Duration duration){
+        return (double)duration.toHours() + (double)duration.toMinutesPart()* (1.0/60.0);
+    }
+
+    private Duration subtractBreakTimeIfNeccessary(Duration duration){
+        int break_duration = settingsService.loadSettings().getBreakDuration();
+        int hours_without_break = 6;
+
+        return duration.toHours() > hours_without_break ? duration.minusMinutes(break_duration): duration;
+
     }
 
     public Double getCurBalance() {
         float weeklyHours = settingsService.loadSettings().getWeeklyHours();
 
-        List<Week> weeks = this.loadWeeksAll();
+        List<TimeEntryDTO> entriesDTO = timeEntryRepository.findAll();
+        List<TimeEntry> entries = new ArrayList<>();
+
+        for(TimeEntryDTO e: entriesDTO){
+            entries.add(convertDTOtoTimeEntry(e));
+        }
+
+        LocalDate refDate = LocalDate.now().plusDays(1);
+
+        List<TimeEntry>filteredEntries = entries
+                .stream().filter(e -> LocalDate.parse(e.getDate(), DATE_FORMAT).isBefore(refDate))
+                .toList();
 
         double hoursPerDay = weeklyHours / 5;
-        int absentDays = getAmountAbsentDays(weeks);
+        int absentDays = getAmountAbsentDays(filteredEntries);
 
-        double requiredHours = weeks.size() * weeklyHours - absentDays * hoursPerDay;
+        double requiredHours = filteredEntries.size() * hoursPerDay - absentDays * hoursPerDay;
 
         double sum = 0;
 
-        for(Week week: weeks){
-            TimeEntry firstEntry = week.getTimeEntries().get(0);
-            LocalDate date = LocalDate.parse(firstEntry.getDate(), DATE_FORMAT);
-            sum += this.getWorkedHoursByWeek(date, true);
+        for(TimeEntry e: filteredEntries){
+            Duration diff = this.calcTimeDifference(e);
+            diff = subtractBreakTimeIfNeccessary(diff);
+            sum += durationToDouble(diff);
         }
 
         return sum - requiredHours;
 
     }
 
-    private int getAmountAbsentDays(List<Week> weeks) {
+    private int getAmountAbsentDays(List<TimeEntry> entries) {
         int result = 0;
-        for(Week week: weeks){
-            for(TimeEntry entry: week.getTimeEntries()){
+            for(TimeEntry entry: entries){
                 if(entry.getAbsent()) result++;
             }
-        }
         return result;
     }
 
+    public void deleteWeek(Week week) {
+        for(TimeEntry e : week.getTimeEntries()){
+            timeEntryRepository.deleteById(Long.valueOf(e.getId()));
+        }
+    }
 }

@@ -112,4 +112,19 @@ export class DataService {
   // set weeks(value: Week[]) {
   //   this._weeks = value;
   // }
+  deleteWeek(week: Week): Observable<any> {
+    return new Observable(o => {
+      this.timesheetService.deleteWeek(week)
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            o.next();
+          }, error: () => {
+            o.error();
+          }
+        })
+
+    })
+
+  }
 }
