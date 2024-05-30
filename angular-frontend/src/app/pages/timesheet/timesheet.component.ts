@@ -10,7 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   templateUrl: './timesheet.component.html',
   styleUrl: './timesheet.component.css'
 })
-export class TimesheetComponent{
+export class TimesheetComponent {
   public text: String;
   weeks: Week[];
   curWeek: Week;
@@ -34,8 +34,6 @@ export class TimesheetComponent{
         this.curWeek = this.weeks[this.curIndex];
       }
     });
-
-
 
 
     // this.curIndex = this.weeks.length - 1;
@@ -96,6 +94,7 @@ export class TimesheetComponent{
 
 
         entry.date = dayString + '.' + monthString + '.' + yearString;
+        entry.absent = false;
 
         newWeek.timeEntries.push(entry);
       }
@@ -160,11 +159,13 @@ export class TimesheetComponent{
   }
 
   calcTotalTime(): string {
-    let result ="00:00"
+    let result = "00:00"
     this.curWeek.timeEntries.forEach(e => {
-      let diff = this.calcTimeDifference(e.startTime, e.endTime);
-      result = this.addDifference(result, diff);
-    })
+      if (!e.absent) {
+        let diff = this.calcTimeDifference(e.startTime, e.endTime);
+        result = this.addDifference(result, diff);
+      }
+    });
     return result;
   }
 
@@ -172,12 +173,12 @@ export class TimesheetComponent{
     const [h1, m1]: number[] = v1.split(':');
     const [h2, m2]: number[] = v2.split(':');
 
-    let sum: number = ((h1 *1)+ (h2 *1)) * 60 + ((m2 *1) + (m1 *1));
+    let sum: number = ((h1 * 1) + (h2 * 1)) * 60 + ((m2 * 1) + (m1 * 1));
     console.log(sum);
 
     // if (sum < 0) sum += 24 * 60;
-    const hours:number = Math.floor(sum / 60);
-    const minutes:number = sum - hours * 60;
+    const hours: number = Math.floor(sum / 60);
+    const minutes: number = sum - hours * 60;
     const hh = hours.toString().padStart(2, '0');
     const mm = minutes.toString().padStart(2, '0');
     return `${hh}:${mm}`;

@@ -17,6 +17,9 @@ public class TimeEntryDTO {
     @Column(name = "endtime")
     private String endtime;
 
+    @Column(name = "absent")
+    private boolean absent;
+
     public TimeEntryDTO() {
     }
 
@@ -62,5 +65,11 @@ public class TimeEntryDTO {
         this.endtime = endtime;
     }
 
+    public boolean isAbsent() {
+        return absent;
+    }
 
+    public void setAbsent(boolean absent) {
+        this.absent = absent;
+    }
 }

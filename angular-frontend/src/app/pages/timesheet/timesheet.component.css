@@ -6,3 +6,7 @@
 input:focus {
   outline: none;
 }
+
+disabled {
+  background-color: gray;
+}

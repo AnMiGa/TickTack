@@ -78,6 +78,7 @@ public class WeekDataService {
         result.setDay(entry.getDay());
         result.setStartTime(entry.getStarttime());
         result.setEndTime(entry.getEndtime());
+        result.setAbsent(entry.isAbsent());
         return result;
     }
 
@@ -88,6 +89,7 @@ public class WeekDataService {
         result.setDay(entry.getDay());
         result.setStarttime(entry.getStartTime());
         result.setEndtime(entry.getEndTime());
+        result.setAbsent(entry.getAbsent());
         return result;
     }
 
@@ -114,12 +116,14 @@ public class WeekDataService {
 
         if(curWeek.isPresent()){
             List<TimeEntry> entries = new ArrayList<>();
-            for(TimeEntry e : curWeek.get().getTimeEntries()){
-                LocalDate entryDate = LocalDate.parse(e.getDate(), DATE_FORMAT);
-                if(fullWeek){
-                    entries.add(e);
-                } else if(entryDate.isBefore(date) || entryDate.isEqual(date)){
-                    entries.add(e);
+            for(TimeEntry e : curWeek.get().getTimeEntries()) {
+                if (!e.getAbsent()) {
+                    LocalDate entryDate = LocalDate.parse(e.getDate(), DATE_FORMAT);
+                    if (fullWeek) {
+                        entries.add(e);
+                    } else if (entryDate.isBefore(date) || entryDate.isEqual(date)) {
+                        entries.add(e);
+                    }
                 }
             }
             return calcTotalHours(entries);
@@ -161,7 +165,10 @@ public class WeekDataService {
 
         List<Week> weeks = this.loadWeeksAll();
 
-        double requiredHours = weeks.size() * weeklyHours;
+        double hoursPerDay = weeklyHours / 5;
+        int absentDays = getAmountAbsentDays(weeks);
+
+        double requiredHours = weeks.size() * weeklyHours - absentDays * hoursPerDay;
 
         double sum = 0;
 
@@ -174,4 +181,15 @@ public class WeekDataService {
         return sum - requiredHours;
 
     }
+
+    private int getAmountAbsentDays(List<Week> weeks) {
+        int result = 0;
+        for(Week week: weeks){
+            for(TimeEntry entry: week.getTimeEntries()){
+                if(entry.getAbsent()) result++;
+            }
+        }
+        return result;
+    }
+
 }

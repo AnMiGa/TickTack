@@ -188,6 +188,9 @@ components:
         endTime:
           type: string
           example: "15:50"
+        absent:
+          type: boolean
+          example: false
 
     Settings:
       title: settings
