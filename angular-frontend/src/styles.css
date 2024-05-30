@@ -8,5 +8,5 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .container {
-  margin: 30px 100px 30px 30px;
+  padding: 30px 100px 30px 30px;
 }
