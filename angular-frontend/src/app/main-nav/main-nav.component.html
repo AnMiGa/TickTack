@@ -3,7 +3,7 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-toolbar class="cursor-default" color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="">Overview</a>
       <a mat-list-item routerLink="timesheet">Timesheet</a>
@@ -22,7 +22,7 @@
         </button>
       }
       <mat-icon>history</mat-icon>
-      <span style="margin-left: 10px">TickTack</span>
+      <span class="ml-2 cursor-default">TickTack</span>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

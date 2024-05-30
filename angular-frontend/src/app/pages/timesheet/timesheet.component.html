@@ -1,12 +1,12 @@
 <div class="container">
-  <h2>TimeSheet</h2>
+  <h2 class="cursor-default">TimeSheet</h2>
   <div class="grid grid-cols-3 place-items-center">
     <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast"
             matTooltip="go to previous week"
             matTooltipShowDelay="1000">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <div class="text-center font-bold">KW {{ curWeek.cw }}
+    <div class="text-center font-bold cursor-default">KW {{ curWeek.cw }}
       - {{ curWeek.year }}
     </div>
     <div class="place-self-end">
@@ -14,15 +14,15 @@
               matTooltipShowDelay="1000">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
-      <button mat-icon-button (click)="addNewWeek()" [hidden]="!isFirst" matTooltip="add new week"
-              matTooltipShowDelay="1000">
+      <button mat-icon-button (click)="addNewWeek()" [hidden]="!isFirst" matTooltip="add current week"
+              matTooltipShowDelay="200">
         <mat-icon>add</mat-icon>
       </button>
 
     </div>
   </div>
   <div>
-    <div class="grid grid-cols-6 gap-2 pr-4 pl-4 mt-2">
+    <div class="grid grid-cols-6 gap-2 mt-2 pl-4 pr-4 cursor-default">
       <div>DAY</div>
       <div>DATE</div>
       <div>START</div>
@@ -36,29 +36,29 @@
     <mat-card *ngFor="let entry of curWeek.timeEntries" class="mt-2" [ngClass]="{'text-gray-300': entry.absent}">
       <mat-card-content>
         <div class="grid grid-cols-6 gap-2">
-          <div>{{ entry.day }}</div>
-          <div>{{ entry.date }}</div>
+          <div class="cursor-default">{{ entry.day }}</div>
+          <div class="cursor-default">{{ entry.date }}</div>
           <div>
-            <input type="time" [(ngModel)]="entry.startTime" class="w-1/2" (change)="saveData()"
+            <input type="time" [(ngModel)]="entry.startTime" class="cursor-text" (change)="saveData()"
                    [disabled]="entry.absent">
           </div>
           <div>
-            <input type="time" [(ngModel)]="entry.endTime" class="w-1/2" (change)="saveData()"
+            <input type="time" [(ngModel)]="entry.endTime" class="cursor-text" (change)="saveData()"
                    [disabled]="entry.absent">
           </div>
-          <div id="timeDiff">{{ calcTimeDifference(entry.startTime, entry.endTime) }} h</div>
+          <div class="cursor-default" id="timeDiff">{{ calcTimeDifference(entry.startTime, entry.endTime) }}</div>
           <div>
-            <input type="checkbox" [(ngModel)]="entry.absent" (change)="saveData()">
+            <input class="cursor-pointer" type="checkbox" [(ngModel)]="entry.absent" (change)="saveData()">
           </div>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
-  <div class=" grid grid-cols-6 gap-2 pr-4 pl-4 mt-5 text-xl">
+  <div class=" grid grid-cols-6 gap-2 pr-4 pl-4 mt-5 text-xl cursor-default">
     <div class="font-bold col-start-4 text-right mt-2">Total: </div>
-    <div class="mt-2">{{ calcTotalTime() }} h</div>
+    <div class="mt-2">{{ calcTotalTime() }}</div>
     <button class="place-self-end" mat-fab color="primary" aria-label="Example icon button with a delete icon"
-            matTooltip="delete current week" (click)="deleteWeek(curWeek)">
+            matTooltip="delete current week" (click)="deleteWeek(curWeek)" matTooltipShowDelay="200">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
