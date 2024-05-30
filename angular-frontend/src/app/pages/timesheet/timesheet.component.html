@@ -1,14 +1,16 @@
 <div class="container">
   <h2>TimeSheet</h2>
-  <div class="grid grid-cols-3 place-items-center w-5/6">
-    <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast">
+  <div class="grid grid-cols-3 place-items-center">
+    <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast" matTooltip="go to previous week"
+            matTooltipShowDelay="1000">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <div class="text-center font-bold" style=" display: inline-block; width: 200px">KW {{ curWeek.cw }}
+    <div class="text-center font-bold">KW {{ curWeek.cw }}
       - {{ curWeek.year }}
     </div>
     <div class="place-self-end">
-      <button mat-icon-button (click)="nextWeek()" [hidden]="isFirst">
+      <button mat-icon-button (click)="nextWeek()" [hidden]="isFirst" matTooltip="go to next week"
+              matTooltipShowDelay="1000">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
       <button mat-icon-button (click)="addNewWeek()" [hidden]="!isFirst" matTooltip="add new week"
@@ -19,14 +21,14 @@
     </div>
   </div>
   <div>
-    <div class="grid grid-cols-5 gap-2 pr-4 pl-4 mt-2 w-5/6">
+    <div class="grid grid-cols-5 gap-2 pr-4 pl-4 mt-2">
       <div>DAY</div>
       <div>DATE</div>
       <div>START</div>
       <div>END</div>
       <div>DURATION</div>
     </div>
-    <mat-card *ngFor="let entry of curWeek.timeEntries" class="mt-2 w-5/6">
+    <mat-card *ngFor="let entry of curWeek.timeEntries" class="mt-2">
       <mat-card-content>
         <div class="grid grid-cols-5 gap-2">
           <div>{{ entry.day }}</div>
@@ -42,7 +44,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class=" grid grid-cols-5 gap-2 pr-4 pl-4 w-5/6 mt-5 text-xl">
+  <div class=" grid grid-cols-5 gap-2 pr-4 pl-4 mt-5 text-xl">
     <span class="font-bold col-start-4 place-self-end">Total: </span>
     <span>{{ calcTotalTime() }} h</span>
   </div>
