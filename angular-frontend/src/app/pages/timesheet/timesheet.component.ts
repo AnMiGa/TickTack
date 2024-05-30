@@ -1,32 +1,30 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, ElementRef, OnDestroy, QueryList, ViewChildren} from '@angular/core';
 import {DefaultService, TimeEntry, Week} from "../../api";
-import {first} from "rxjs";
+import {delay, first} from "rxjs";
 import {DataService} from "../../services/data.service";
 import {AppSettingsService} from "../../services/app-settings.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-timesheet',
   templateUrl: './timesheet.component.html',
   styleUrl: './timesheet.component.css'
 })
-export class TimesheetComponent implements OnDestroy{
+export class TimesheetComponent{
   public text: String;
   weeks: Week[];
   curWeek: Week;
   curIndex: number;
   isFirst: boolean = false;
   isLast: boolean = false;
-  inputChanged: boolean;
 
 
   constructor(
     private defaultService: DefaultService,
     private dataService: DataService,
-    private settingsService: AppSettingsService,
+    public settingsService: AppSettingsService,
     private snackBar: MatSnackBar,
-    ) {
+  ) {
     dataService.getWeeksAll().pipe(first()).subscribe({
       next: (value: Week[]) => {
         this.weeks = value;
@@ -37,7 +35,7 @@ export class TimesheetComponent implements OnDestroy{
       }
     });
 
-    this.inputChanged = false;
+
 
 
     // this.curIndex = this.weeks.length - 1;
@@ -46,14 +44,6 @@ export class TimesheetComponent implements OnDestroy{
     // this.curWeek = this.weeks[this.curIndex];
 
   }
-
-ngOnDestroy(){
-    if(this.inputChanged){
-      this.dataService.saveWeek(this.curWeek).pipe(first()).subscribe();
-      this.inputChanged = false;
-    }
-}
-
 
   sendRequest() {
     this.defaultService.helloGet().pipe(first()).subscribe({
@@ -64,8 +54,6 @@ ngOnDestroy(){
   }
 
   nextWeek() {
-    this.dataService.saveWeek(this.curWeek).pipe(first()).subscribe();
-    this.inputChanged = false;
     this.curIndex++;
     this.isFirst = this.curIndex == this.weeks.length - 1;
     this.isLast = false;
@@ -73,8 +61,6 @@ ngOnDestroy(){
   }
 
   previousWeek() {
-    this.dataService.saveWeek(this.curWeek).pipe(first()).subscribe();
-    this.inputChanged = false;
     this.curIndex--;
     this.isLast = this.curIndex == 0;
     this.isFirst = false;
@@ -161,7 +147,7 @@ ngOnDestroy(){
       const [h1, m1] = start.split(':');
       const [h2, m2] = end.split(':');
       let diff = (h2 - h1) * 60 + (m2 - m1);
-      if(diff >= 360) diff -= this.settingsService.breakDurationMinutes;
+      if (diff >= 360) diff -= this.settingsService.breakDurationMinutes;
       if (diff < 0) diff += 24 * 60;
       const hours = Math.floor(diff / 60);
       const minutes = diff - hours * 60;
@@ -174,12 +160,30 @@ ngOnDestroy(){
   }
 
   calcTotalTime(): string {
-
-
-    return
+    let result ="00:00"
+    this.curWeek.timeEntries.forEach(e => {
+      let diff = this.calcTimeDifference(e.startTime, e.endTime);
+      result = this.addDifference(result, diff);
+    })
+    return result;
   }
 
-  setInputChanged() {
-    this.inputChanged = true;
+  private addDifference(v1, v2): string {
+    const [h1, m1]: number[] = v1.split(':');
+    const [h2, m2]: number[] = v2.split(':');
+
+    let sum: number = ((h1 *1)+ (h2 *1)) * 60 + ((m2 *1) + (m1 *1));
+    console.log(sum);
+
+    // if (sum < 0) sum += 24 * 60;
+    const hours:number = Math.floor(sum / 60);
+    const minutes:number = sum - hours * 60;
+    const hh = hours.toString().padStart(2, '0');
+    const mm = minutes.toString().padStart(2, '0');
+    return `${hh}:${mm}`;
+  }
+
+  saveData() {
+    this.dataService.saveWeek(this.curWeek).pipe(first()).subscribe();
   }
 }

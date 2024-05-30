@@ -1,15 +1,18 @@
 <div class="container">
   <h2>TimeSheet</h2>
   <div class="grid grid-cols-3 place-items-center w-5/6">
-    <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast" >
+    <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <div class="text-center font-bold" style=" display: inline-block; width: 200px">KW {{ curWeek.cw }} - {{curWeek.year}} </div>
+    <div class="text-center font-bold" style=" display: inline-block; width: 200px">KW {{ curWeek.cw }}
+      - {{ curWeek.year }}
+    </div>
     <div class="place-self-end">
       <button mat-icon-button (click)="nextWeek()" [hidden]="isFirst">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
-      <button mat-icon-button (click)="addNewWeek()" [hidden]="!isFirst" matTooltip="add new week" matTooltipShowDelay="1000">
+      <button mat-icon-button (click)="addNewWeek()" [hidden]="!isFirst" matTooltip="add new week"
+              matTooltipShowDelay="1000">
         <mat-icon>add</mat-icon>
       </button>
 
@@ -21,7 +24,7 @@
       <div>DATE</div>
       <div>START</div>
       <div>END</div>
-      <div>TOTAL</div>
+      <div>DURATION</div>
     </div>
     <mat-card *ngFor="let entry of curWeek.timeEntries" class="mt-2 w-5/6">
       <mat-card-content>
@@ -29,18 +32,19 @@
           <div>{{ entry.day }}</div>
           <div>{{ entry.date }}</div>
           <div>
-            <input type="time" [(ngModel)]="entry.startTime" class="w-1/2" (change)="setInputChanged()">
+            <input type="time" [(ngModel)]="entry.startTime" class="w-1/2" (change)="saveData()">
           </div>
           <div>
-            <input type="time" [(ngModel)]="entry.endTime" class="w-1/2" (change)="setInputChanged()">
+            <input type="time" [(ngModel)]="entry.endTime" class="w-1/2" (change)="saveData()">
           </div>
-          <div>{{calcTimeDifference(entry.startTime, entry.endTime)}} h</div>
+          <div id="timeDiff">{{ calcTimeDifference(entry.startTime, entry.endTime) }} h</div>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
-
-<!--  <button mat-raised-button (click)="sendRequest()">Test</button>-->
-<!--  <p>Answer: {{text}}</p>-->
+  <div class=" grid grid-cols-5 gap-2 pr-4 pl-4 w-5/6 mt-5 text-xl">
+    <span class="font-bold col-start-4 place-self-end">Total: </span>
+    <span>{{ calcTotalTime() }} h</span>
+  </div>
 </div>
 

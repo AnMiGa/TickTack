@@ -6,27 +6,18 @@ import {AppSettingsService} from "../../services/app-settings.service";
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css'
 })
-export class SettingsComponent implements OnDestroy{
+export class SettingsComponent{
   // weeklyHours: number;
   // breakDuration: number;
 
   constructor(public settingsService: AppSettingsService) {
   }
 
-  ngOnDestroy() {
+
+  public saveSettings(){
     this.settingsService.saveSettings();
-    console.log("Test");
-  }
-
-  ngOnInit(){
-      // this.weeklyHours = this.settingsService.weeklyHours;
-      // this.breakDuration = this.settingsService.breakDurationMinutes;
-  }
-
-  saveSettings(){
-      // this.settingsService.weeklyHours = this.weeklyHours;
-      // this.settingsService.breakDurationMinutes = this.breakDuration;
   }
 
 
 }
+

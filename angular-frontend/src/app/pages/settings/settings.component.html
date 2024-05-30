@@ -9,11 +9,21 @@
   <table class="mt-5">
     <tr>
       <td>
+        <mat-label>User name</mat-label>
+      </td>
+      <td>
+        <mat-form-field class="w-px-200">
+          <input matInput type="text" [(ngModel)]="settingsService.user_name" (change)="saveSettings()">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <mat-label>Weekly Working Hours</mat-label>
       </td>
       <td>
         <mat-form-field style="width:120px">
-          <input matInput type="number" [(ngModel)]="settingsService.weeklyHours">
+          <input matInput type="number" [(ngModel)]="settingsService.weeklyHours" (change)="saveSettings()">
           <span matTextSuffix>h</span>
         </mat-form-field>
       </td>
@@ -24,7 +34,7 @@
       </td>
       <td>
         <mat-form-field style="width:120px">
-          <input matInput type="number" [(ngModel)]="settingsService.breakDurationMinutes">
+          <input matInput type="number" [(ngModel)]="settingsService.breakDurationMinutes" (change)="saveSettings()">
           <span matTextSuffix>min</span>
         </mat-form-field>
       </td>
