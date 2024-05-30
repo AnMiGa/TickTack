@@ -1,9 +1,9 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container cursor-default">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar class="cursor-default" color="primary">Menu</mat-toolbar>
+    <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="">Overview</a>
       <a mat-list-item routerLink="timesheet">Timesheet</a>
@@ -22,7 +22,7 @@
         </button>
       }
       <mat-icon>history</mat-icon>
-      <span class="ml-2 cursor-default">TickTack</span>
+      <span class="ml-2">TickTack</span>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

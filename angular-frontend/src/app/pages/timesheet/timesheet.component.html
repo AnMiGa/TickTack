@@ -1,12 +1,12 @@
-<div class="container">
-  <h2 class="cursor-default">TimeSheet</h2>
+<div class="container cursor-default">
+  <h2>TimeSheet</h2>
   <div class="grid grid-cols-3 place-items-center">
     <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast"
             matTooltip="go to previous week"
             matTooltipShowDelay="1000">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <div class="text-center font-bold cursor-default">KW {{ curWeek.cw }}
+    <div class="text-center font-bold">KW {{ curWeek.cw }}
       - {{ curWeek.year }}
     </div>
     <div class="place-self-end">
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div>
-    <div class="grid grid-cols-6 gap-2 mt-2 pl-4 pr-4 cursor-default">
+    <div class="grid grid-cols-6 gap-2 mt-2 pl-4 pr-4">
       <div>DAY</div>
       <div>DATE</div>
       <div>START</div>
@@ -36,8 +36,8 @@
     <mat-card *ngFor="let entry of curWeek.timeEntries" class="mt-2" [ngClass]="{'text-gray-300': entry.absent}">
       <mat-card-content>
         <div class="grid grid-cols-6 gap-2">
-          <div class="cursor-default">{{ entry.day }}</div>
-          <div class="cursor-default">{{ entry.date }}</div>
+          <div>{{ entry.day }}</div>
+          <div>{{ entry.date }}</div>
           <div>
             <input type="time" [(ngModel)]="entry.startTime" class="cursor-text" (change)="saveData()"
                    [disabled]="entry.absent">
@@ -46,7 +46,7 @@
             <input type="time" [(ngModel)]="entry.endTime" class="cursor-text" (change)="saveData()"
                    [disabled]="entry.absent">
           </div>
-          <div class="cursor-default" id="timeDiff">{{ calcTimeDifference(entry.startTime, entry.endTime) }}</div>
+          <div id="timeDiff">{{ calcTimeDifference(entry.startTime, entry.endTime) }}</div>
           <div>
             <input class="cursor-pointer" type="checkbox" [(ngModel)]="entry.absent" (change)="saveData()">
           </div>
@@ -54,7 +54,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class=" grid grid-cols-6 gap-2 pr-4 pl-4 mt-5 text-xl cursor-default">
+  <div class=" grid grid-cols-6 gap-2 pr-4 pl-4 mt-5 text-xl">
     <div class="font-bold col-start-4 text-right mt-2">Total: </div>
     <div class="mt-2">{{ calcTotalTime() }}</div>
     <button class="place-self-end" mat-fab color="primary" aria-label="Example icon button with a delete icon"
