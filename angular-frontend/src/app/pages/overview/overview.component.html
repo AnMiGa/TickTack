@@ -1,20 +1,20 @@
-<div class="container cursor-default">
+<div class="p-12 cursor-default">
   <div class="mat-headline-2">Hello, {{ settingsService.user_name }}!</div>
-  <div class="flex gap-6">
-    <mat-card class="w-1/3">
+  <div class="grid grid-cols-2 gap-12 max-sm:grid-cols-1" >
+    <mat-card class="min-w-56 max-w-xl">
       <mat-card-content class="text-center">
         <div class="text-xl">hours worked</div>
         <div>this week</div>
-        <div class="text-8xl font-bold p-6"
+        <div class="text-8xl max-md:text-6xl max-sm:text-8xl font-bold p-6"
              [ngClass]=" hoursCurrWeek < settingsService.weeklyHours ? 'text-red-500' :'text-lime-500'">{{ hoursCurrWeek | number: '1.0-1' }}
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card class="w-1/3">
+    <mat-card class="min-w-56 max-w-xl">
       <mat-card-content class="text-center">
         <div class="text-xl">hour balance</div>
         <div>in total</div>
-        <div class="text-8xl font-bold p-6"
+        <div class="text-8xl max-md:text-6xl max-sm:text-8xl font-bold p-6"
              [ngClass]=" curBalance < 0 ? 'text-red-500' :'text-lime-500'">
           <span *ngIf="curBalance > 0">+</span>{{ curBalance | number: '1.0-1' }}
         </div>
