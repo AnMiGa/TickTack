@@ -21,6 +21,8 @@ import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatTooltip} from "@angular/material/tooltip";
+import { DeleteWeekDialogComponent } from './pages/timesheet/components/delete-week-dialog/delete-week-dialog.component';
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 
 export function apiConfigFactory(): Configuration {
   const params: ConfigurationParameters = {
@@ -35,29 +37,34 @@ export function apiConfigFactory(): Configuration {
     MainNavComponent,
     OverviewComponent,
     TimesheetComponent,
-    SettingsComponent
+    SettingsComponent,
+    DeleteWeekDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
-        MatCard,
-        MatCardContent,
-        ApiModule.forRoot(apiConfigFactory),
-        HttpClientModule,
-        MatGridList,
-        MatGridTile,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatSuffix,
-        FormsModule,
-        MatTooltip
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatCard,
+    MatCardContent,
+    ApiModule.forRoot(apiConfigFactory),
+    HttpClientModule,
+    MatGridList,
+    MatGridTile,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatSuffix,
+    FormsModule,
+    MatTooltip,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle
+  ],
   providers: [
     provideAnimationsAsync()
   ],

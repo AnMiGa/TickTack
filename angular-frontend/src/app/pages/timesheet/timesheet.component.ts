@@ -4,6 +4,8 @@ import {delay, first} from "rxjs";
 import {DataService} from "../../services/data.service";
 import {AppSettingsService} from "../../services/app-settings.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteWeekDialogComponent} from "./components/delete-week-dialog/delete-week-dialog.component";
 
 @Component({
   selector: 'app-timesheet',
@@ -24,6 +26,7 @@ export class TimesheetComponent {
     private dataService: DataService,
     public settingsService: AppSettingsService,
     private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     dataService.getWeeksAll().pipe(first()).subscribe({
       next: (value: Week[]) => {
@@ -178,7 +181,6 @@ export class TimesheetComponent {
     const [h2, m2]: number[] = v2.split(':');
 
     let sum: number = ((h1 * 1) + (h2 * 1)) * 60 + ((m2 * 1) + (m1 * 1));
-    console.log(sum);
 
     // if (sum < 0) sum += 24 * 60;
     const hours: number = Math.floor(sum / 60);
@@ -193,20 +195,30 @@ export class TimesheetComponent {
   }
 
   deleteWeek(week: Week) {
-    this.dataService.deleteWeek(week)
-      .pipe(first())
-      .subscribe({
-        next: () => {
-          this.dataService.getWeeksAll().pipe(first()).subscribe({
-            next: (value: Week[]) => {
-              this.setWeek(value);
-              this.snackBar.open("week was deleted successfully", "close", {duration: 5000})
-            }, error: () => {
-              this.snackBar.open("Something went wrong. Week could not be deleted.", "close", {duration: 5000})
-            }
-          })
-        }
-      });
+    const deleteDialog = this.dialog.open(DeleteWeekDialogComponent, {
+      width: '350px',
+      data: {
+        week: 'KW ' + this.curWeek.cw + ' - ' + this.curWeek.year,
+      },
+    });
 
+    deleteDialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.dataService.deleteWeek(week)
+          .pipe(first())
+          .subscribe({
+            next: () => {
+              this.dataService.getWeeksAll().pipe(first()).subscribe({
+                next: (value: Week[]) => {
+                  this.setWeek(value);
+                  this.snackBar.open("week was deleted successfully", "close", {duration: 5000})
+                }, error: () => {
+                  this.snackBar.open("Something went wrong. Week could not be deleted.", "close", {duration: 5000})
+                }
+              })
+            }
+          });
+      }
+    });
   }
 }

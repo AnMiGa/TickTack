@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Delete Week</h2>
+<mat-dialog-content>
+  <div class="text-center">Do you really want to delete all data of
+    <span class="font-bold">{{data.week}}</span>
+    ?
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button [mat-dialog-close]=true cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
