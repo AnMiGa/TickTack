@@ -1,13 +1,4 @@
-.entries {
-  column-count: 5;
-  column-gap: 15px;
-}
-
 input:focus {
   outline: none;
 }
 
-
-disabled {
-  background-color: gray;
-}

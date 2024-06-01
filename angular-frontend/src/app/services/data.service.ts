@@ -7,47 +7,7 @@ import {first, Observable} from "rxjs";
 })
 export class DataService {
 
-  // private _weeks: Week[];
-
   constructor(private timesheetService: TimesheetService) {
-
-    // this._weeks =
-    //   [
-    //     {
-    //       "year": 2024,
-    //       "cw": 19,
-    //       "timeEntries": [
-    //         {
-    //           "day": "MONDAY",
-    //           "date": "06.05.24",
-    //           "startTime": "08:12",
-    //           "endTime": "16:50"
-    //         },
-    //         {
-    //           "day": "TUESDAY",
-    //           "date": "07.05.24",
-    //           "startTime": "07:52",
-    //           "endTime": "17:01"
-    //         },
-    //         {
-    //           "day": "WEDNESDAY",
-    //           "date": "08.05.24",
-    //           "startTime": "07:52",
-    //           "endTime": "17:01"
-    //         },
-    //         {
-    //           "day": "THURSDAY",
-    //           "date": "09.05.24",
-    //           "startTime": "07:52",
-    //           "endTime": "17:01"
-    //         },
-    //         {
-    //           "day": "FRIDAY",
-    //           "date": "10.05.24",
-    //           "startTime": "07:52",
-    //           "endTime": "17:01"
-    //         }]
-    //     }]
   }
 
 
@@ -62,10 +22,8 @@ export class DataService {
           error: () => {
             o.error();
           }
-        })
-
-    })
-    // return this._weeks;
+        });
+    });
   }
 
   public saveWeek(week: Week): Observable<any> {
@@ -109,9 +67,6 @@ export class DataService {
     });
   }
 
-  // set weeks(value: Week[]) {
-  //   this._weeks = value;
-  // }
   deleteWeek(week: Week): Observable<any> {
     return new Observable(o => {
       this.timesheetService.deleteWeek(week)
@@ -122,9 +77,7 @@ export class DataService {
           }, error: () => {
             o.error();
           }
-        })
-
-    })
-
+        });
+    });
   }
 }

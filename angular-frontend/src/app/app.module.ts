@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MainNavComponent } from './main-nav/main-nav.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { OverviewComponent } from './pages/overview/overview.component';
-import { TimesheetComponent } from './pages/timesheet/timesheet.component';
-import { SettingsComponent } from './pages/settings/settings.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {MainNavComponent} from './main-nav/main-nav.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {OverviewComponent} from './pages/overview/overview.component';
+import {TimesheetComponent} from './pages/timesheet/timesheet.component';
+import {SettingsComponent} from './pages/settings/settings.component';
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {ApiModule, Configuration, ConfigurationParameters} from "./api";
 import {HttpClientModule} from "@angular/common/http";
@@ -21,7 +21,7 @@ import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatTooltip} from "@angular/material/tooltip";
-import { DeleteWeekDialogComponent } from './pages/timesheet/components/delete-week-dialog/delete-week-dialog.component';
+import {DeleteWeekDialogComponent} from './pages/timesheet/components/delete-week-dialog/delete-week-dialog.component';
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 
 export function apiConfigFactory(): Configuration {
@@ -70,4 +70,5 @@ export function apiConfigFactory(): Configuration {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

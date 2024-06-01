@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Settings, SettingsService} from "../api";
 import {first} from "rxjs";
 
@@ -7,9 +7,7 @@ import {first} from "rxjs";
 })
 export class AppSettingsService {
 
-  private settings: Settings;
-
-  private _user_name:string;
+  private _user_name: string;
   private _weeklyHours: number;
   private _breakDurationMinutes: number;
 
@@ -17,13 +15,14 @@ export class AppSettingsService {
     this.settingsService.getSettings()
       .pipe(first())
       .subscribe(
-        {next: (settings: Settings) => {
-          this._user_name= settings.user_name;
-          this._weeklyHours = settings.weekly_hours;
-          this._breakDurationMinutes = settings.break_duration;
-    } })
+        {
+          next: (settings: Settings) => {
+            this._user_name = settings.user_name;
+            this._weeklyHours = settings.weekly_hours;
+            this._breakDurationMinutes = settings.break_duration;
+          }
+        })
   }
-
 
   get user_name(): string {
     return this._user_name;
