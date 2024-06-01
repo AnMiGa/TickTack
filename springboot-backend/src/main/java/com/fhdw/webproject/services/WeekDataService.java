@@ -172,12 +172,11 @@ public class WeekDataService {
 
         List<TimeEntry> filteredEntries = entries
                 .stream().filter(e -> LocalDate.parse(e.getDate(), DATE_FORMAT).isBefore(refDate))
+                .filter(e -> !e.getAbsent())
                 .toList();
 
         double hoursPerDay = weeklyHours / 5;
-        int absentDays = getAmountAbsentDays(filteredEntries);
-
-        double requiredHours = filteredEntries.size() * hoursPerDay - absentDays * hoursPerDay;
+        double requiredHours = filteredEntries.size() * hoursPerDay;
 
         double sum = 0;
 
@@ -189,14 +188,6 @@ public class WeekDataService {
 
         return sum - requiredHours;
 
-    }
-
-    private int getAmountAbsentDays(List<TimeEntry> entries) {
-        int result = 0;
-        for (TimeEntry entry : entries) {
-            if (entry.getAbsent()) result++;
-        }
-        return result;
     }
 
     public void deleteWeek(Week week) {
