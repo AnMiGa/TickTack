@@ -13,8 +13,7 @@ import java.util.List;
 @Service
 public class DefaultApiDelegateImpl implements DefaultApiDelegate {
 
-    public DefaultApiDelegateImpl(){
-
+    public DefaultApiDelegateImpl() {
     }
 
     @Autowired
@@ -23,7 +22,6 @@ public class DefaultApiDelegateImpl implements DefaultApiDelegate {
     @Override
     public ResponseEntity<String> helloGet() {
         List<TimeEntryDTO> timeEntries = timeEntryRepository.findAll();
-
         return new ResponseEntity<>(timeEntries.toString(), HttpStatus.OK);
     }
 }

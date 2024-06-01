@@ -3,7 +3,6 @@ package com.fhdw.webproject.api;
 import com.fhdw.webproject.facade.ServiceFacade;
 import com.openapi.api.TimesheetApiDelegate;
 import com.openapi.model.Week;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

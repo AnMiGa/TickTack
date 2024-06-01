@@ -29,11 +29,19 @@ public class ServiceFacade {
         weekDataService.saveWeek(week);
     }
 
-    public void saveSettings(Settings settings) { settingsService.saveSettings(settings); }
+    public void saveSettings(Settings settings) {
+        settingsService.saveSettings(settings);
+    }
 
-    public Double getWorkedHoursCurrWeek() { return weekDataService.getWorkedHoursCurrWeek();}
+    public Double getWorkedHoursCurrWeek() {
+        return weekDataService.getWorkedHoursCurrWeek();
+    }
 
-    public Double getCurBalance() { return weekDataService.getCurBalance();  }
+    public Double getCurBalance() {
+        return weekDataService.getCurBalance();
+    }
 
-    public void deleteWeek(Week week) { weekDataService.deleteWeek(week); }
+    public void deleteWeek(Week week) {
+        weekDataService.deleteWeek(week);
+    }
 }

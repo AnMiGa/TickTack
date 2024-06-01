@@ -32,7 +32,6 @@ public class WeekDataService {
         List<Week> result = new ArrayList<>();
 
         List<TimeEntryDTO> timeEntries = timeEntryRepository.findAll();
-//        DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yy");
 
         for (TimeEntryDTO entry : timeEntries) {
             LocalDate date = LocalDate.parse(entry.getDate(), DATE_FORMAT);
@@ -65,17 +64,13 @@ public class WeekDataService {
         return result;
     }
 
-    private void sortTimeEntries(List<TimeEntry> timeEntries) {
-        timeEntries.sort((e1, e2) -> LocalDate.parse(e1.getDate(), DATE_FORMAT).compareTo(LocalDate.parse(e2.getDate(), DATE_FORMAT)));
-    }
-
     private TimeEntry convertDTOtoTimeEntry(TimeEntryDTO entry) {
         TimeEntry result = new TimeEntry();
         result.setId(entry.getId());
         result.setDate(entry.getDate());
         result.setDay(entry.getDay());
-        result.setStartTime(entry.getStarttime());
-        result.setEndTime(entry.getEndtime());
+        result.setStartTime(entry.getStartTime());
+        result.setEndTime(entry.getEndTime());
         result.setAbsent(entry.isAbsent());
         return result;
     }
@@ -85,8 +80,8 @@ public class WeekDataService {
         result.setId(entry.getId());
         result.setDate(entry.getDate());
         result.setDay(entry.getDay());
-        result.setStarttime(entry.getStartTime());
-        result.setEndtime(entry.getEndTime());
+        result.setStartTime(entry.getStartTime());
+        result.setEndTime(entry.getEndTime());
         result.setAbsent(entry.getAbsent());
         return result;
     }
@@ -98,7 +93,7 @@ public class WeekDataService {
         }
     }
 
-    public Double getWorkedHoursCurrWeek(){
+    public Double getWorkedHoursCurrWeek() {
         return getWorkedHoursByWeek(LocalDate.now(), false);
     }
 
@@ -112,9 +107,9 @@ public class WeekDataService {
 
         Optional<Week> curWeek = weeks.stream().filter(w -> w.getYear() == curYear && w.getCw() == curCW).findFirst();
 
-        if(curWeek.isPresent()){
+        if (curWeek.isPresent()) {
             List<TimeEntry> entries = new ArrayList<>();
-            for(TimeEntry e : curWeek.get().getTimeEntries()) {
+            for (TimeEntry e : curWeek.get().getTimeEntries()) {
                 if (!e.getAbsent()) {
                     LocalDate entryDate = LocalDate.parse(e.getDate(), DATE_FORMAT);
                     if (fullWeek) {
@@ -128,19 +123,13 @@ public class WeekDataService {
         } else {
             return 0.0;
         }
-
-
-//        return curWeek.isPresent() ? calcTotalHours(curWeek.get()): 0.0;
     }
 
     private Double calcTotalHours(List<TimeEntry> entries) {
-       int break_duration = settingsService.loadSettings().getBreakDuration();
-
-        int hours_without_break = 6;
 
         Duration duration = Duration.ZERO;
 
-        for(TimeEntry entry: entries){
+        for (TimeEntry entry : entries) {
             Duration diff = calcTimeDifference(entry);
             diff = subtractBreakTimeIfNeccessary(diff);
             duration = duration.plus(diff);
@@ -151,21 +140,21 @@ public class WeekDataService {
     }
 
     private Duration calcTimeDifference(TimeEntry entry) {
-        LocalTime start = entry.getStartTime() == null || entry.getStartTime().isEmpty() ? null: LocalTime.parse(entry.getStartTime());
+        LocalTime start = entry.getStartTime() == null || entry.getStartTime().isEmpty() ? null : LocalTime.parse(entry.getStartTime());
         LocalTime end = entry.getEndTime() == null || entry.getEndTime().isEmpty() ? null : LocalTime.parse(entry.getEndTime());
 
-        return start == null || end == null ? Duration.ZERO: Duration.between(start, end);
+        return start == null || end == null ? Duration.ZERO : Duration.between(start, end);
     }
 
-    private double durationToDouble(Duration duration){
-        return (double)duration.toHours() + (double)duration.toMinutesPart()* (1.0/60.0);
+    private double durationToDouble(Duration duration) {
+        return (double) duration.toHours() + (double) duration.toMinutesPart() * (1.0 / 60.0);
     }
 
-    private Duration subtractBreakTimeIfNeccessary(Duration duration){
+    private Duration subtractBreakTimeIfNeccessary(Duration duration) {
         int break_duration = settingsService.loadSettings().getBreakDuration();
         int hours_without_break = 6;
 
-        return duration.toHours() > hours_without_break ? duration.minusMinutes(break_duration): duration;
+        return duration.toHours() > hours_without_break ? duration.minusMinutes(break_duration) : duration;
 
     }
 
@@ -175,13 +164,13 @@ public class WeekDataService {
         List<TimeEntryDTO> entriesDTO = timeEntryRepository.findAll();
         List<TimeEntry> entries = new ArrayList<>();
 
-        for(TimeEntryDTO e: entriesDTO){
+        for (TimeEntryDTO e : entriesDTO) {
             entries.add(convertDTOtoTimeEntry(e));
         }
 
         LocalDate refDate = LocalDate.now().plusDays(1);
 
-        List<TimeEntry>filteredEntries = entries
+        List<TimeEntry> filteredEntries = entries
                 .stream().filter(e -> LocalDate.parse(e.getDate(), DATE_FORMAT).isBefore(refDate))
                 .toList();
 
@@ -192,7 +181,7 @@ public class WeekDataService {
 
         double sum = 0;
 
-        for(TimeEntry e: filteredEntries){
+        for (TimeEntry e : filteredEntries) {
             Duration diff = this.calcTimeDifference(e);
             diff = subtractBreakTimeIfNeccessary(diff);
             sum += durationToDouble(diff);
@@ -204,14 +193,14 @@ public class WeekDataService {
 
     private int getAmountAbsentDays(List<TimeEntry> entries) {
         int result = 0;
-            for(TimeEntry entry: entries){
-                if(entry.getAbsent()) result++;
-            }
+        for (TimeEntry entry : entries) {
+            if (entry.getAbsent()) result++;
+        }
         return result;
     }
 
     public void deleteWeek(Week week) {
-        for(TimeEntry e : week.getTimeEntries()){
+        for (TimeEntry e : week.getTimeEntries()) {
             timeEntryRepository.deleteById(Long.valueOf(e.getId()));
         }
     }

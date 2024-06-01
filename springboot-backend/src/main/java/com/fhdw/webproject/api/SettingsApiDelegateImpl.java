@@ -1,7 +1,6 @@
 package com.fhdw.webproject.api;
 
 import com.fhdw.webproject.facade.ServiceFacade;
-import com.fhdw.webproject.services.SettingsService;
 import com.openapi.api.SettingsApiDelegate;
 import com.openapi.model.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SettingsApiDelegateImpl implements SettingsApiDelegate {
-
 
     @Autowired
     ServiceFacade serviceFacade;

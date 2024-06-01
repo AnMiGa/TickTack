@@ -10,12 +10,12 @@ public class TimeEntryDTO {
     private Integer id;
     @Column(name = "day")
     private String day;
-    @Column(name ="date")
+    @Column(name = "date")
     private String date;
-    @Column(name ="starttime")
-    private String starttime;
+    @Column(name = "starttime")
+    private String startTime;
     @Column(name = "endtime")
-    private String endtime;
+    private String endTime;
 
     @Column(name = "absent")
     private boolean absent;
@@ -49,20 +49,20 @@ public class TimeEntryDTO {
         this.date = date;
     }
 
-    public String getStarttime() {
-        return starttime;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setStarttime(String starttime) {
-        this.starttime = starttime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEndtime() {
-        return endtime;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setEndtime(String endtime) {
-        this.endtime = endtime;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public boolean isAbsent() {

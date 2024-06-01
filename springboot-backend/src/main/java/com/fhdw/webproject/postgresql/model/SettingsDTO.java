@@ -8,11 +8,11 @@ public class SettingsDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(name="user_name")
+    @Column(name = "user_name")
     private String user_name;
     @Column(name = "weekly_hours")
     private float weekly_hours;
-    @Column(name ="break_duration")
+    @Column(name = "break_duration")
     private Integer break_duration;
 
     public void setId(Integer id) {
