@@ -153,7 +153,7 @@ export class TimesheetComponent {
       const [h1, m1] = start.split(':');
       const [h2, m2] = end.split(':');
       let diff = (h2 - h1) * 60 + (m2 - m1);
-      if (diff >= 360) diff -= this.settingsService.breakDurationMinutes;
+      if (diff > 360) diff -= this.settingsService.breakDurationMinutes;
       if (diff < 0) diff += 24 * 60;
       const hours = Math.floor(diff / 60);
       const minutes = diff - hours * 60;
@@ -211,7 +211,7 @@ export class TimesheetComponent {
               this.dataService.getWeeksAll().pipe(first()).subscribe({
                 next: (value: Week[]) => {
                   this.setWeek(value);
-                  this.snackBar.open("week was deleted successfully", "close", {duration: 5000})
+                  this.snackBar.open("Week was deleted successfully", "close", {duration: 5000})
                 }, error: () => {
                   this.snackBar.open("Something went wrong. Week could not be deleted.", "close", {duration: 5000})
                 }

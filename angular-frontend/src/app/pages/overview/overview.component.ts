@@ -14,7 +14,7 @@ export class OverviewComponent implements OnInit {
   curBalance: number;
 
   constructor(public settingsService: AppSettingsService,
-              public dataService: DataService) {
+              private dataService: DataService) {
 
   }
 
