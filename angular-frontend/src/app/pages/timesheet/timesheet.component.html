@@ -1,5 +1,6 @@
 <div class="p-12 cursor-default">
   <h2>TimeSheet</h2>
+  <div *ngIf="weeks != null && weeks.length != 0">
   <div class="grid grid-cols-3 place-items-center">
     <button class="place-self-start" mat-icon-button (click)="previousWeek()" [disabled]="isLast"
             matTooltip="go to previous week"
@@ -60,6 +61,15 @@
     <button class="place-self-end" mat-fab color="primary" aria-label="Example icon button with a delete icon"
             matTooltip="delete current week" (click)="deleteWeek(curWeek)" matTooltipShowDelay="200">
       <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  </div>
+  <div *ngIf="weeks == null || weeks.length == 0" class="m-40 text-center text-gray-400 text-lg">
+    <div>No week has been added.</div>
+    <div>Add week to start using TickTack.</div>
+    <button class="mt-4" mat-fab color="primary" (click)="addNewWeek()" matTooltip="add current week"
+            matTooltipShowDelay="200">
+      <mat-icon>add</mat-icon>
     </button>
   </div>
 </div>

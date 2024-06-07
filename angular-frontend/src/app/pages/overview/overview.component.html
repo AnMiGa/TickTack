@@ -1,6 +1,9 @@
 <div class="p-12 cursor-default">
-  <div class="mat-headline-2">Hello, {{ settingsService.user_name }}!</div>
-  <div class="grid grid-cols-2 gap-12 max-sm:grid-cols-1" >
+  <div class="mat-headline-2">Hello,
+    <span *ngIf="settingsService.user_name">{{ settingsService.user_name }}!</span>
+    <span *ngIf="!settingsService.user_name">Unknown!</span>
+  </div>
+  <div *ngIf="settingsService.weeklyHours && settingsService.breakDurationMinutes" class="grid grid-cols-2 gap-12 max-sm:grid-cols-1" >
     <mat-card class="min-w-56 max-w-xl">
       <mat-card-content class="text-center">
         <div class="text-xl">hours worked</div>
@@ -20,5 +23,9 @@
         </div>
       </mat-card-content>
     </mat-card>
+  </div>
+  <div *ngIf="!settingsService.weeklyHours || !settingsService.breakDurationMinutes " class="text-center text-gray-400 text-lg">
+    Base values not set.
+    Set base values in Settings.
   </div>
 </div>

@@ -1,6 +1,6 @@
-import {Component, ElementRef, OnDestroy, QueryList, ViewChildren} from '@angular/core';
+import {Component} from '@angular/core';
 import {DefaultService, TimeEntry, Week} from "../../api";
-import {delay, first} from "rxjs";
+import {first} from "rxjs";
 import {DataService} from "../../services/data.service";
 import {AppSettingsService} from "../../services/app-settings.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -45,7 +45,7 @@ export class TimesheetComponent {
   private setWeek(value: Week[]) {
     this.weeks = value;
     this.curIndex = this.weeks.length - 1;
-    this.isLast = this.curIndex <= 0;
+    this.isLast = this.weeks.length == 1 ? true : this.curIndex <= 0;
     this.isFirst = this.curIndex >= this.weeks.length - 1;
     this.curWeek = this.weeks[this.curIndex];
   }
@@ -112,11 +112,12 @@ export class TimesheetComponent {
           next: () => {
             this.dataService.getWeeksAll().pipe(first()).subscribe({
               next: (value: Week[]) => {
-                this.weeks = value;
-                this.curIndex = this.weeks.length - 1;
-                this.curWeek = this.weeks[this.curIndex];
-
-                this.isLast = false;
+                this.setWeek(value);
+                // this.weeks = value;
+                // this.curIndex = this.weeks.length - 1;
+                // this.curWeek = this.weeks[this.curIndex];
+                //
+                // this.isLast = false;
               }
             });
           }
@@ -153,7 +154,7 @@ export class TimesheetComponent {
       const [h1, m1] = start.split(':');
       const [h2, m2] = end.split(':');
       let diff = (h2 - h1) * 60 + (m2 - m1);
-      if (diff > 360) diff -= this.settingsService.breakDurationMinutes;
+      if (diff > 360) diff -= this.settingsService.breakDurationMinutes != null ? this.settingsService.breakDurationMinutes : 0;
       if (diff < 0) diff += 24 * 60;
       const hours = Math.floor(diff / 60);
       const minutes = diff - hours * 60;

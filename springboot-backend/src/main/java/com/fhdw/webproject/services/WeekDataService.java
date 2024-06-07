@@ -159,7 +159,14 @@ public class WeekDataService {
     }
 
     public Double getCurBalance() {
-        float weeklyHours = settingsService.loadSettings().getWeeklyHours();
+        float weeklyHours;
+        try{
+            weeklyHours = settingsService.loadSettings().getWeeklyHours();
+        }catch(Exception e){
+            weeklyHours = 0;
+        }
+
+//        if(weeklyHours.) weeklyHours = 0.0;
 
         List<TimeEntryDTO> entriesDTO = timeEntryRepository.findAll();
         List<TimeEntry> entries = new ArrayList<>();

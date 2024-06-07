@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "settings")
 public class SettingsDTO {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "user_name")
     private String user_name;

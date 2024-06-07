@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AppSettingsService} from "../../services/app-settings.service";
 
 @Component({
@@ -7,8 +7,6 @@ import {AppSettingsService} from "../../services/app-settings.service";
   styleUrl: './settings.component.css'
 })
 export class SettingsComponent{
-  // weeklyHours: number;
-  // breakDuration: number;
 
   constructor(public settingsService: AppSettingsService) {
   }
